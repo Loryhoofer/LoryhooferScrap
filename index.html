@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>CrookTown</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<link href="mainmenu.css" rel="stylesheet">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C704CZBZW0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-C704CZBZW0');
+</script>
+</head>
+
+
+<script id="vertexShader" type="x-shader/x-vertex">
+    uniform sampler2D   zTexture;
+    uniform float       zScale;
+    uniform vec3        zLut[ 256 ];
+
+    varying float vAmount;
+
+    void main() {
+          vec4 heightData = texture2D( zTexture, uv );
+
+          vAmount = heightData.r; 
+
+          // move the position along the normal
+        vec3 newPosition = position + normal * zScale * vAmount;
+
+           gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+     }
+ </script>
+
+ <script id="fragmentShader" type="x-shader/x-vertex">
+     uniform vec3        zLut[ 256 ];
+
+     varying float vAmount;
+
+     void main() {
+         int index = int(vAmount) * 255;
+           vec3 vColor = vec3(0, vAmount, 0.4);
+           //gl_FragColor = vec4(zLut[32], 1.0);
+           gl_FragColor = vec4(vColor, 1.0);
+      }
+ </script>
+
+<body>
+
+    <div id="peepoSad2" >
+        <img style="width: 20%" src="banner.png" alt="Avatar" >
+
+        <div class="infobox" style="display: inline-table; text-align: left; ">
+                <p>Switch Weapons: <span style="color:red"> Q </span></p>
+                <p>Reload: <span style="color:red"> R </span></p>
+                
+            </div>
+        <div class="container">
+          <img src="survive.png" alt="Avatar" class="image">
+
+
+          
+          <div class="middle">
+            <button onclick="loadWinter()" type="button" class="btn btn-lg btn-primary">Join</button>
+          </div>
+
+        </div>
+
+
+        <div class="container">
+          <img src="build/assets/textures/sandbox.png" alt="Avatar" class="image">
+          <div class="middle">
+            <button onclick="loadSandbox()" type="button" class="btn btn-lg btn-primary">Join</button>
+          </div>
+          
+        </div>
+
+
+
+
+        
+
+
+
+        <div class="container">
+            <a href="https://discord.gg/juYbPmmwzg">Discord</a>
+            <a style="margin-left: 10px; color:red"  target=”_blank” href="https://paypal.me/boldbrandings?locale.x=en_GB">Donate <3</a>
+        </div>
+
+    </div>  
+
+	<script src="build/sketchbook.min.js"></script>
+	<script>
+
+
+        function loadWinter()
+        {
+            document.getElementById("peepoSad2").style.display = "none";
+            const world = new Sketchbook.World('build/assets/winter.glb');
+        }
+
+
+        function loadSandbox()
+        {
+            document.getElementById("peepoSad2").style.display = "none";
+            const world = new Sketchbook.World('build/assets/sandbox.glb');
+        }
+
+
+
+
+	</script> 
+
+</body>
+
+</html>
