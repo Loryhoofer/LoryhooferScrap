@@ -81,6 +81,14 @@
           
         </div>
 
+        <div class="container">
+          <img src="build/assets/textures/jjij.png" alt="Avatar" class="image">
+          <div class="middle">
+            <button onclick="loadMultiplayer()" type="button" class="btn btn-lg btn-primary">Join</button>
+          </div>
+          
+        </div>
+
 
 
 
@@ -110,6 +118,12 @@
         {
             document.getElementById("peepoSad2").style.display = "none";
             const world = new Sketchbook.World('build/assets/sandbox.glb');
+        }
+
+        function loadMultiplayer()
+        {
+            document.getElementById("peepoSad2").style.display = "none";
+            const world = new Sketchbook.World('build/assets/multiplayerTest.glb');
         }
 
 
